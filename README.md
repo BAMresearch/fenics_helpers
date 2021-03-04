@@ -18,7 +18,7 @@ setuptools.setup(
     name="your project",
     ...
     install_requires=["some", "packages",
-    "fenics_helpers @ https://github.com/BAMresearch/fenics_helpers/tarball/use_find_packages"],
+    "fenics_helpers @ git+https://github.com/BAMresearch/fenics_helpers"],
     "more", "packages"],
     ...
 )

@@ -3,5 +3,5 @@ import fenics_helpers.timestepping
 import fenics_helpers.rk
 try:
     import fenics_helpers.plotting
-except ModuleNotFoundError as e:
+except ImportError as e:
     print("Skip import of plotting module." + e)

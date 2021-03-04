@@ -4,4 +4,4 @@ import fenics_helpers.rk
 try:
     import fenics_helpers.plotting
 except ImportError as e:
-    print("Skip import of plotting module." + e)
+    print(f"Skip import of plotting module: {e}")

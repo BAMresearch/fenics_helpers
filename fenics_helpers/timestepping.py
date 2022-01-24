@@ -100,7 +100,7 @@ class TimeStepper:
         if dt is None:
             dt = self._dt_max
 
-        u_prev = self._u.copy(deepcopy=True)
+        u_prev = self._u.vector().get_local() + 0.0
         t = t_start
         self._post_process(t)
 
@@ -127,7 +127,7 @@ class TimeStepper:
 
             if converged:
                 progress.success(t, dt, num_iter)
-                u_prev.assign(self._u)
+                u_prev[:] = self._u.vector().get_local()[:]
                 self._post_process(t)
 
                 # increase the time step for fast convergence
@@ -140,7 +140,7 @@ class TimeStepper:
             else:
                 progress.error(t, dt, num_iter)
 
-                self._u.assign(u_prev)
+                self._u.vector().set_local(u_prev)
                 t -= dt
 
                 dt0 *= self.decrease_factor

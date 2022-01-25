@@ -151,6 +151,28 @@ class TestAdaptive(unittest.TestCase):
         with self.assertRaises(RuntimeError) as cm:
             self.stepper.adaptive(1.5, dt=1.0, checkpoints=checkpoints)
 
+class TestAdaptiveMixed(unittest.TestCase):
+    def test_mixed(self):
+        solve = DeterministicSolve()
+        # solve = lambda t: (3, random.choice([True, True, True, True, False]))
+        pp = lambda t: None
+        mesh = dolfin.UnitIntervalMesh(10)
+        elem_1 = dolfin.VectorElement('P', mesh.ufl_cell(), 1, dim=2)
+        elem_2 = dolfin.FiniteElement('P', mesh.ufl_cell(), 1)
+        V = dolfin.FunctionSpace(mesh, elem_1 * elem_2)
+        u = dolfin.Function(V)
+
+        u_ref0 = u.split(deepcopy=False)[0]
+        # check for the link between u and u_ref0
+        u.vector()[:] = 42.
+        self.assertAlmostEqual(u_ref0.vector()[0], 42.)
+
+        stepper = fenics_helpers.timestepping.TimeStepper(solve, pp, u)
+        stepper.adaptive(1.)
+        
+        # make sure that the link between u and u_ref0 still remains!
+        u.vector()[:] = 6174.
+        self.assertAlmostEqual(u_ref0.vector()[0], 6174.)
 
 if __name__ == "__main__":
     unittest.main()

@@ -100,7 +100,7 @@ class TimeStepper:
         if dt is None:
             dt = self._dt_max
 
-        u_prev = self._u.vector().get_local() + 0.0
+        u_prev = self._u.vector().get_local()
         t = t_start
         self._post_process(t)
 

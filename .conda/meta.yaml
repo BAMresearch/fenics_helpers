@@ -1,0 +1,57 @@
+{% set name = "fenics_helpers" %}
+{% set version = "0.1" %}
+
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+
+source:
+  # point to directory containing setup.py
+  path: ../
+
+
+build:
+  number: 0
+  noarch: python
+  skip: true  # [py<37]
+  script: 
+    - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
+
+
+requirements:
+  host:
+    - pip
+    - python >=3.8
+    - setuptools
+
+  run:
+    - python >=3.8
+    - numpy
+    - fenics >=2019.1.0
+    - tqdm
+    - matplotlib
+
+
+test:
+  source_files:
+    - tests
+  imports:
+    - dolfin
+    - fenics_helpers
+  # run requirements are automatically included during testing
+  requires:
+    - hypothesis
+
+
+about:
+  home: https://github.com/BAMresearch/fenics_helpers
+  summary: Little Helper classes that come up repeatedly when writing solvers in FEniCS.
+  license: MIT
+  license_file: LICENSE
+
+
+extra:
+  recipe-maintainers:
+    - pdiercks

@@ -8,10 +8,10 @@ setuptools.setup(
     version="0.1",
     author="Christoph Pohl",
     author_email="christoph.pohl@bam.de",
-    description="A tiny package to modify the node order of quadratic triangles and tets in a xdmf-hdf mesh to work with FEniCS/DOLFIN.",
+    description="Little Helper classes that come up repeatedly when writing solvers in FEniCS.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/nutofem/fenics_helpers",
+    url="https://github.com/BAMresearch/fenics_helpers",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

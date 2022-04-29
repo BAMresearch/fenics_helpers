@@ -43,6 +43,8 @@ test:
   # run requirements are automatically included during testing
   requires:
     - hypothesis
+  commands:
+    - python -m unittest discover -v -s tests
 
 
 about:

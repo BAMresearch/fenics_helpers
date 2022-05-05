@@ -14,8 +14,8 @@ source:
 
 build:
   number: 0
-  noarch: python
   skip: true  # [py<37]
+  skip: true  # [win or osx]
   script: 
     - {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
 

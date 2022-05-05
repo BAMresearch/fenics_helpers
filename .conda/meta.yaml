@@ -23,11 +23,11 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python
     - setuptools
 
   run:
-    - python >=3.8
+    - python
     - numpy
     - fenics >=2019.1.0
     - tqdm
